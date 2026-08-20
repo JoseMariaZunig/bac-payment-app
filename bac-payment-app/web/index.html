@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAC Payment Console</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="topbar-brand">
+            <span class="brand-mark">BAC</span>
+            <span class="brand-sep">/</span>
+            <span class="brand-name">Payment Console</span>
+        </div>
+        <div class="topbar-status" id="tokenStatus">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Sin token</span>
+        </div>
+    </header>
+
+    <main class="layout">
+
+        <!-- ============ PANEL DE CONTROL ============ -->
+        <section class="control-panel">
+
+            <div class="step" data-step="1">
+                <div class="step-head">
+                    <span class="step-num">01</span>
+                    <h2>Autenticación</h2>
+                </div>
+                <button class="btn btn-primary" id="btnToken">Obtener token</button>
+            </div>
+
+            <div class="step" data-step="2">
+                <div class="step-head">
+                    <span class="step-num">02</span>
+                    <h2>Origen de datos</h2>
+                </div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="tipoPago" value="Planilla" checked>
+                        <span>Planilla</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipoPago" value="Proveedores">
+                        <span>Proveedores</span>
+                    </label>
+                </div>
+                <button class="btn btn-secondary" id="btnSoftland">Consultar Softland</button>
+            </div>
+
+            <div class="step-row">
+                <div class="step" data-step="3">
+                    <div class="step-head">
+                        <span class="step-num">03</span>
+                        <h2>Pago</h2>
+                    </div>
+                    <button class="btn btn-danger" id="btnPago" disabled>Realizar pago</button>
+                </div>
+
+                <div class="step" data-step="4">
+                    <div class="step-head">
+                        <span class="step-num">04</span>
+                        <h2>Rastreo</h2>
+                    </div>
+                    <button class="btn btn-secondary" id="btnRastreo" disabled>Rastrear pago</button>
+                </div>
+            </div>
+
+            <div class="step" data-step="5">
+                <div class="step-head">
+                    <span class="step-num">05</span>
+                    <h2>Reportes de cuenta</h2>
+                </div>
+
+                <label class="select-field">
+                    <span>Tipo de reporte</span>
+                    <select id="tipoReporte">
+                        <option value="camt053">CAMT053</option>
+                        <option value="mt940">MT940</option>
+                        <option value="mt942">MT942</option>
+                        <option value="saldo">Saldo actual CAMT052</option>
+                    </select>
+                </label>
+
+                <div class="date-group" id="fechasReporte">
+                    <label class="date-field">
+                        <span id="labelFechaDesde">Fecha</span>
+                        <input type="date" id="fechaDesde">
+                    </label>
+                    <label class="date-field" id="fechaHastaWrapper">
+                        <span>Hasta</span>
+                        <input type="date" id="fechaHasta053">
+                    </label>
+                </div>
+                <p class="step-desc" id="reporteHint">camt.053 sí soporta un rango real de fechas.</p>
+
+                <button class="btn btn-secondary" id="btnConsultarReporte">Consultar</button>
+            </div>
+
+            <div class="tx-summary" id="txSummary" hidden>
+                <div class="tx-summary-title">Transacción activa</div>
+                <div class="tx-summary-row"><span>ID</span><strong id="txId">—</strong></div>
+                <div class="tx-summary-row"><span>Categoría</span><strong id="txCat">—</strong></div>
+                <div class="tx-summary-row"><span>Total</span><strong id="txTotal">—</strong></div>
+            </div>
+
+        </section>
+
+        <!-- ============ CONSOLA / LOG ============ -->
+        <section class="console-panel">
+            <div class="console-header">
+                <span>Consola de operaciones</span>
+                <button class="btn-ghost" id="btnClear">Limpiar</button>
+            </div>
+            <div class="console-body" id="consoleBody">
+                <div class="log-line log-info">Consola lista. Empieza obteniendo el token.</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
